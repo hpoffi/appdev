@@ -1,21 +1,43 @@
-import React from "react";
-import { Text, View,ScrollView,Image,StyleSheet,TextInput } from "react-native";
+import React, { useState } from "react";
+import {Text,View} from "react-native";
+import ImageOption from "./src/components/ImageOption/ImageOption";
 import icon from "./assets/icon.png";
+import styles from "./App.styles";
+import BaseButton from "./src/components/BaseButton";
+import question from "./assets/data/oneQuestionWithOption";
+
 
 const App = () => {
+  //const [value, setvalue] = useState();
+  const [selected, setSelected] = useState(null);
+  //const origin=[0,1,2,3];
+  //const doubled = origin.map((value) => value*2);
+  //console.log(doubled);
+  const onButtonPress = () =>{
+    console.warn("Pressed");
+  };
+
   return (
-    <ScrollView>
-    <View style={{ flex: 1, alignItems: "center", justifyContent: "center" }}>
-      <Text numberOfLines={2} ellipsizeMode="tail" style={{ fontSize: 40, fontWeight: "bold" }}>
-      Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt 
-      ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamc
+    <View style={styles.root}>
+      <Text style={styles.title}>
+        {question.question}
       </Text>
-      <Image source={icon}
-       style={{width: 100, height: 100, backgroundColor: "red"}} 
-       resizeMode="contain"/>
-       <TextInput placeholder ="what's your name"/>
+
+      <View style={styles.optionsContainer}>
+        {question.options.map((option) =>(
+         <ImageOption
+          key={option.id} 
+          image={option.image} 
+          text={option.text}
+          isSelected={selected?.id === option.id}
+          onPress={() =>setSelected(option)}
+          />
+          ))}
+
+      </View>
+      <BaseButton title="Continue" onPress={onButtonPress} disabled={!selected}/>
     </View>
-    </ScrollView>
+
   );
 };
 export default App; 
