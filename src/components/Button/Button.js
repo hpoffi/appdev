@@ -3,7 +3,7 @@ import React from 'react';
 import styles from "./styles";
 import PropTypes from "prop-types";
 
-const BaseButton = ({ onPress, text = "Submit", disabled}) => {
+const Button = ({ onPress, text = "Submit", disabled}) => {
     return (
         <Pressable 
         style={[styles.container, disabled ? styles.disabledContainer : {}]} 

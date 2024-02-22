@@ -1,21 +1,24 @@
 import React, { useState } from "react";
-import {Text,View} from "react-native";
+import {Alert, Text,View} from "react-native";
 import ImageOption from "./src/components/ImageOption/ImageOption";
-import icon from "./assets/icon.png";
 import styles from "./App.styles";
-import BaseButton from "./src/components/BaseButton";
-import question from "./assets/data/oneQuestionWithOption";
+//import question from "./assets/data/oneQuestionWithOption";
+import Button from "./src/components/Button";
+import question from "./assets/data/imageMulatipleChoiceQuestions"
+
 
 
 const App = () => {
-  //const [value, setvalue] = useState();
   const [selected, setSelected] = useState(null);
-  //const origin=[0,1,2,3];
-  //const doubled = origin.map((value) => value*2);
-  //console.log(doubled);
+  const [selectedQuestion, setSelectedQuestion] = useState(question[0]);
   const onButtonPress = () =>{
-    console.warn("Pressed");
-  };
+    if(selected.correct){
+      Alert.alert("Correct!");}
+      else{
+        Alert.alert("Wroooong");
+      }
+    };
+  
 
   return (
     <View style={styles.root}>
@@ -24,18 +27,18 @@ const App = () => {
       </Text>
 
       <View style={styles.optionsContainer}>
-        {question.options.map((option) =>(
+        {selectedQuestion.options.map((option) =>(
          <ImageOption
           key={option.id} 
           image={option.image} 
           text={option.text}
           isSelected={selected?.id === option.id}
-          onPress={() =>setSelected(option)}
+          onpress={() =>setSelected(option)}
           />
           ))}
 
       </View>
-      <BaseButton title="Continue" onPress={onButtonPress} disabled={!selected}/>
+      <Button text="click me" onPress={onButtonPress} disabled={!selected}/>
     </View>
 
   );

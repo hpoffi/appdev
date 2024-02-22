@@ -12,7 +12,7 @@ const ImageOption = ({image, text,isSelected,onpress}) => {
 
   return (
     <Pressable
-     onPress={() => console.warn(text)}
+     onPress={onpress}
      style={[styles.optionContainer, isSelected ? styles.selectedContainer : {}]}>
       <Image source={{ uri: image }}
         resizeMode="contain"
